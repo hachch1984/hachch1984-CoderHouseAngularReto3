@@ -9,17 +9,30 @@ import { Cliente } from 'src/app/interfaces/cliente';
 export class ClienteTablaComponent {
 
 
-  @Input() clientes: Cliente[] = [];
+  @Input() inClientes: Cliente[] = [];
+  @Input() inClientePorActualizar: Cliente | null = null;
 
-  @Output() OutClienteActualizar = new EventEmitter<Cliente>();
+  @Output() outClienteActualizar = new EventEmitter<Cliente>();
 
 
   onActualizarClick(cliente: Cliente): void {
-    this.OutClienteActualizar.emit(cliente);
+    this.outClienteActualizar.emit(cliente);
   }
 
   onEliminarClick(cliente: Cliente): void {
-    this.clientes = this.clientes.filter((c) => c.id !== cliente.id);
+    this.inClientes = this.inClientes.filter((c) => c.id !== cliente.id);
   }
+
+
+  isClientePorActualizar(cliente: Cliente): boolean {
+    return this.inClientePorActualizar?.id === cliente.id;
+  }
+
+
+  seEstaActualizandoAlgunCliente(): boolean {
+    return this.inClientePorActualizar !== null;
+  }
+
+
 
 }

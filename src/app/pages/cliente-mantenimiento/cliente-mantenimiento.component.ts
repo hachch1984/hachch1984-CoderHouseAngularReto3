@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente, Sexo } from 'src/app/interfaces/cliente';
-import {UUID} from 'uuid-generator-ts';
+import { UUID } from 'uuid-generator-ts';
 
 @Component({
   selector: 'app-cliente-mantenimiento',
@@ -10,13 +10,13 @@ import {UUID} from 'uuid-generator-ts';
 export class ClienteMantenimientoComponent implements OnInit {
 
 
-  ngOnInit(): void { 
-    this.clientes.push({ id: new UUID().getDashFreeUUID(), nombre: 'Juan', apellido: 'Perez', email: 'juan@email.com', sexo: Sexo.Masculino })
+  ngOnInit(): void {
+    this.onReinicarListadoGeneral()
   }
 
 
 
- 
+  clientePorActualizar: Cliente | null = null;
 
 
   clientes: Cliente[] = [
@@ -26,5 +26,29 @@ export class ClienteMantenimientoComponent implements OnInit {
 
 
 
+  setClientePorActualizar(cliente: Cliente | null): void {
+    this.clientePorActualizar = cliente;
+  }
+
+
+  addCliente(cliente: Cliente): void {
+    this.clientes.push(cliente);
+  }
+
+  updateCliente(cliente: Cliente | null): void {
+    if (cliente) {
+      this.clientes = this.clientes.map((c) => c.id === cliente.id ? cliente : c);
+    }
+    this.clientePorActualizar = null;
+  }
+
+  onReinicarListadoGeneral(): void {
+    this.clientes = [];
+    this.clientes.push({ id: new UUID().getDashFreeUUID(), nombre: 'Juan', apellido: 'Perez', email: 'juan@hotmail.com', sexo: Sexo.Masculino });
+    this.clientes.push({ id: new UUID().getDashFreeUUID(), nombre: 'Maria', apellido: 'Gomez', email: 'maria@gmail.com', sexo: Sexo.Femenino });
+    this.clientes.push({ id: new UUID().getDashFreeUUID(), nombre: 'Pedro', apellido: 'Gonzalez', email: 'pedro@yahoo.com', sexo: Sexo.Masculino });
+    this.clientes.push({ id: new UUID().getDashFreeUUID(), nombre: 'Ana', apellido: 'Gimenez', email: 'ana@macromedia.com', sexo: Sexo.Femenino });
+    this.clientes.push({ id: new UUID().getDashFreeUUID(), nombre: 'Lucia', apellido: 'Rodriguez', email: 'lucia@autocad.com', sexo: Sexo.Femenino });
+  }
 
 }

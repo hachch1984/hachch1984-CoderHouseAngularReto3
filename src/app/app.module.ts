@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ClienteMantenimientoComponent } from './pages/cliente-mantenimiento/cliente-mantenimiento.component';
 import { ClienteTablaComponent } from './components/cliente-tabla/cliente-tabla.component';
 import { ClienteFormularioComponent } from './components/cliente-formulario/cliente-formulario.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ClienteFormularioComponent } from './components/cliente-formulario/clie
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
